@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping( value = "conditions" )
+@RequestMapping( value = "" )
 public class WeatherController {
 
 	@RequestMapping("/zip/{zip}")
