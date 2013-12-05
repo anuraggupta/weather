@@ -18,8 +18,7 @@ public class WeatherController {
 
 	private static final String ZIP_CODE_PATTERN = "^\\d{5}$";
 	@Autowired
-	private
-	WeatherService weatherService;
+	private WeatherService weatherService;
 
 	@RequestMapping(value = "zip", method = RequestMethod.POST)
 	public @ResponseBody
@@ -29,17 +28,21 @@ public class WeatherController {
 			return new UIError("invalidinput", "invalid zip code format");
 		}
 
-		WeatherConditions conditionsByZip = weatherService.getConditionsByZip(zip);
+		WeatherConditions conditionsByZip = weatherService
+				.getConditionsByZip(zip);
 
 		if (null == conditionsByZip) {
 
 			return new UIError("apiunavailable", "unable to connect to API");
 		} else if (null != conditionsByZip.getResponse().getError()) {
 
-			return new UIError(conditionsByZip.getResponse().getError()
-					.getType(), "querynotfound".equals(conditionsByZip
-					.getResponse().getError().getType()) ? "zipcode not found"
-					: conditionsByZip.getResponse().getError().getDescription());
+			return new UIError("querynotfound".equals(conditionsByZip
+					.getResponse().getError().getType()) ? "zipnotfound"
+					: conditionsByZip.getResponse().getError().getType(),
+					"querynotfound".equals(conditionsByZip.getResponse()
+							.getError().getType()) ? "zipcode not found"
+							: conditionsByZip.getResponse().getError()
+									.getDescription());
 		}
 
 		return new UISuccessResponse(conditionsByZip);
