@@ -5,11 +5,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.expedia.rest.WeatherConditions;
 import com.expedia.weather.service.WeatherService;
-import com.expedia.weather.service.Zip;
 
 @Service
 public class WunderGroundWeatherServiceImpl implements WeatherService {
@@ -31,19 +31,18 @@ public class WunderGroundWeatherServiceImpl implements WeatherService {
 		 * 
 		 * This is code to post and return a Weather object
 		 */
-		WeatherConditions returns = null ;
+		WeatherConditions returns = null;
 		Map<String, String> vars = new HashMap<String, String>();
 		vars.put("key", KEY);
 		vars.put("zip", zip);
-
 		String uri = API + CONDITIONS + DATA_TYPE;
 		try {
 
 			returns = restTemplate.getForObject(uri,
 					WeatherConditions.class, vars);
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (RestClientException rce) {
 		}
 		return returns;
 	}
+
 }

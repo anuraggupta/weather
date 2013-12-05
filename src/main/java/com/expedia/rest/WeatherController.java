@@ -1,7 +1,5 @@
 package com.expedia.rest;
 
-import java.text.NumberFormat;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,11 +33,11 @@ public class WeatherController {
 		} else if (null != conditionsByZip.getResponse().getError()) {
 
 			return new UIError(conditionsByZip.getResponse().getError()
-					.getType(), "querynotfound".equals(conditionsByZip.getResponse().getError()
-					.getType()) ? "zipcode not found" : conditionsByZip.getResponse().getError()
-							.getDescription());
+					.getType(), "querynotfound".equals(conditionsByZip
+					.getResponse().getError().getType()) ? "zipcode not found"
+					: conditionsByZip.getResponse().getError().getDescription());
 		}
-		
+
 		return new UISuccessResponse(conditionsByZip);
 	}
 }

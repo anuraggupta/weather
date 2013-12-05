@@ -6,15 +6,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WeatherConditions {
 
-	private Response response;
+	private WundergroundResponse response;
+	
 	@JsonProperty("current_observation")
 	private CurrentObservation currentObservation;
 
-	public Response getResponse() {
+	public WundergroundResponse getResponse() {
 		return response;
 	}
 
-	public void setResponse(Response response) {
+	public void setResponse(WundergroundResponse response) {
 		this.response = response;
 	}
 
