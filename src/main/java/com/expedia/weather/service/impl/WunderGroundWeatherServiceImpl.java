@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -15,7 +16,8 @@ import com.expedia.weather.service.WeatherService;
 public class WunderGroundWeatherServiceImpl implements WeatherService {
 
 	public static final String API = "http://api.wunderground.com/api/{key}";
-	public static final String KEY = "ed044d75b91fb500";
+	
+	private String KEY;
 	public static final String CONDITIONS = "/conditions/q/{zip}";
 
 	public static final String DATA_TYPE = ".json";
@@ -24,8 +26,6 @@ public class WunderGroundWeatherServiceImpl implements WeatherService {
 	private RestTemplate restTemplate;
 
 	public WeatherConditions getConditionsByZip(String zip) {
-
-		
 		
 		/*
 		 * 
@@ -33,7 +33,7 @@ public class WunderGroundWeatherServiceImpl implements WeatherService {
 		 */
 		WeatherConditions returns = null;
 		Map<String, String> vars = new HashMap<String, String>();
-		vars.put("key", KEY);
+		vars.put("key", getKEY());
 		vars.put("zip", zip);
 		String uri = API + CONDITIONS + DATA_TYPE;
 		try {
@@ -43,6 +43,15 @@ public class WunderGroundWeatherServiceImpl implements WeatherService {
 		} catch (RestClientException rce) {
 		}
 		return returns;
+	}
+
+	public String getKEY() {
+		return KEY;
+	}
+
+	@Value( "${wunderground.api.key}" )
+	public void setKEY(String kEY) {
+		KEY = kEY;
 	}
 
 }

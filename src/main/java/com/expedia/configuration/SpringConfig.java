@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
@@ -15,6 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 @Configuration
+@PropertySource("classpath:app.properties")
 @EnableWebMvc
 public class SpringConfig extends WebMvcConfigurerAdapter {
 
@@ -25,11 +28,16 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
 		return rt;
 	}
 
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
+
 	@Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/*.html").addResourceLocations("/");
-    }
-	
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/*.html").addResourceLocations("/");
+	}
+
 	@Override
 	public void configureMessageConverters(
 			List<HttpMessageConverter<?>> converters) {
