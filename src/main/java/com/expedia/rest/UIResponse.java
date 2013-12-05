@@ -1,5 +1,5 @@
 package com.expedia.rest;
 
-public class Estimated {
+public interface UIResponse {
 
 }

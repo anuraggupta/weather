@@ -2,50 +2,12 @@
 <head>
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-<style>
-body {
-	background-color: #eee;
-	font: helvetica;
-}
-
-#container {
-	width: 500px;
-	background-color: #fff;
-	margin: 30px auto;
-	padding: 30px;
-	border-radius: 5px;
-	box-shadow: 5px;
-}
-
-.green {
-	font-weight: bold;
-	color: green;
-}
-
-.message {
-	margin-bottom: 10px;
-}
-
-label {
-	width: 70px;
-	display: inline-block;
-}
-
-.hide {
-	display: none;
-}
-
-.error {
-	color: red;
-	font-size: 0.8em;
-}
-</style>
 </head>
 <body align="center">
 	<div align="center">
-		<h1>Weather</h1>
+		<h1>Weather App</h1>
 		<form name="myForm" id="testForm" method="POST">
-			ZipCode: <input type="text" name="zip" value="test" />
+			Enter Zipcode: <input type="text" name="zip" value="test" />
 			<div id="formResponse" class="green"></div>
 			<input type="submit" id="submitZip" value="Find Weather conditions" />
 		</form>
@@ -53,9 +15,14 @@ label {
 	<script>
 $(document).ready(function() {
 	 $('#testForm').submit(function(e) {
+		 $('#formResponse').text('');
          // will pass the form date using the jQuery serialize function
          $.post('conditions/zip', $(this).serialize(), function(response) {
-                 $('#formResponse').text(response);
+        	 if(response.error){
+                 $('#formResponse').text(response.description);
+         	} else {
+         		 $('#formResponse').text(response.city + ' ' + response.state + ' ' +response.tempF + ' ' + 'F');
+         	}
          });
          e.preventDefault(); // prevent actual form submit and page reload
  });

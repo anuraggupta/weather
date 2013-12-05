@@ -19,6 +19,13 @@ public class Response {
 	public void setTermsOfService(String termsOfService) {
 		this.termsOfService = termsOfService;
 	}
+	public WGError getError() {
+		return error;
+	}
+	public void setError(WGError error) {
+		this.error = error;
+	}
 	private String version;
 	private String termsOfService;
+	private WGError error;
 }

@@ -23,8 +23,10 @@ public class WunderGroundWeatherServiceImpl implements WeatherService {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	public WeatherConditions getConditionsByZip(Zip zip) {
+	public WeatherConditions getConditionsByZip(String zip) {
 
+		
+		
 		/*
 		 * 
 		 * This is code to post and return a Weather object
@@ -32,11 +34,7 @@ public class WunderGroundWeatherServiceImpl implements WeatherService {
 		WeatherConditions returns = null ;
 		Map<String, String> vars = new HashMap<String, String>();
 		vars.put("key", KEY);
-		vars.put("zip", zip.getZip());
-		// restTemplate.getMessageConverters().add(
-		// new MappingJacksonHttpMessageConverter());
-		// restTemplate.getMessageConverters().add(
-		// new StringHttpMessageConverter());
+		vars.put("zip", zip);
 
 		String uri = API + CONDITIONS + DATA_TYPE;
 		try {

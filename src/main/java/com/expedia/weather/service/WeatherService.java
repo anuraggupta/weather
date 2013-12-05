@@ -4,5 +4,5 @@ import com.expedia.rest.WeatherConditions;
 
 public interface WeatherService {
 
-	WeatherConditions getConditionsByZip(Zip zip);
+	WeatherConditions getConditionsByZip(String zip);
 }
