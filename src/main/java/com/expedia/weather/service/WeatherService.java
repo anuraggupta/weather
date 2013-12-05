@@ -1,8 +1,8 @@
 package com.expedia.weather.service;
 
-import com.expedia.rest.WeatherConditions;
+import com.expedia.rest.WeatherConditionsResponse;
 
 public interface WeatherService {
 
-	WeatherConditions getConditionsByZip(Zip zip);
+	WeatherConditionsResponse getConditionsByZip(Zip zip) throws WeatherServiceConnectionException;
 }

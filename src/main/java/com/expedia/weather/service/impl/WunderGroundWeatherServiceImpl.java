@@ -5,10 +5,12 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import com.expedia.rest.WeatherConditions;
+import com.expedia.rest.WeatherConditionsResponse;
 import com.expedia.weather.service.WeatherService;
+import com.expedia.weather.service.WeatherServiceConnectionException;
 import com.expedia.weather.service.Zip;
 
 @Service
@@ -23,29 +25,27 @@ public class WunderGroundWeatherServiceImpl implements WeatherService {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	public WeatherConditions getConditionsByZip(Zip zip) {
+	public WeatherConditionsResponse getConditionsByZip(Zip zip)
+			throws WeatherServiceConnectionException {
 
 		/*
 		 * 
 		 * This is code to post and return a Weather object
 		 */
-		WeatherConditions returns = null ;
+		WeatherConditionsResponse returns = null;
 		Map<String, String> vars = new HashMap<String, String>();
 		vars.put("key", KEY);
 		vars.put("zip", zip.getZip());
-		// restTemplate.getMessageConverters().add(
-		// new MappingJacksonHttpMessageConverter());
-		// restTemplate.getMessageConverters().add(
-		// new StringHttpMessageConverter());
-
 		String uri = API + CONDITIONS + DATA_TYPE;
 		try {
 
 			returns = restTemplate.getForObject(uri,
-					WeatherConditions.class, vars);
-		} catch (Exception e) {
-			e.printStackTrace();
+					WeatherConditionsResponse.class, vars);
+		} catch (RestClientException rce) {
+			throw new WeatherServiceConnectionException(
+					"Unable to connect to Wunderground API", rce);
 		}
 		return returns;
 	}
+
 }
