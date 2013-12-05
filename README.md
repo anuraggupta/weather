@@ -14,7 +14,7 @@ From the command line with Maven:
     $ cd weather
     $ mvn clean install
     
-To build the application:
+To run the application:
 -------------------	
 From the command line with Maven:
 
