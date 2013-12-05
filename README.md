@@ -20,3 +20,8 @@ From the command line with Maven:
 
     $ cd weather
     $ mvn tomcat7:run
+
+To see the UI of the application:
+-------------------	
+    
+    http://localhost:8080/weather/Form.html
