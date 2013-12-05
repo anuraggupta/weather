@@ -1,5 +1,6 @@
 package com.expedia.rest;
 
+import com.expedia.weather.service.pojo.WeatherConditions;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)

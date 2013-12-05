@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import com.expedia.rest.WeatherConditions;
 import com.expedia.weather.service.WeatherService;
+import com.expedia.weather.service.pojo.WeatherConditions;
 
 @Service
 public class WunderGroundWeatherServiceImpl implements WeatherService {

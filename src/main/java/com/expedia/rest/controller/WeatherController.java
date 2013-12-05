@@ -1,4 +1,4 @@
-package com.expedia.rest;
+package com.expedia.rest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,7 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.expedia.rest.UIError;
+import com.expedia.rest.UIResponse;
+import com.expedia.rest.UISuccessResponse;
 import com.expedia.weather.service.WeatherService;
+import com.expedia.weather.service.pojo.WeatherConditions;
 
 @Controller
 @RequestMapping(value = "conditions")

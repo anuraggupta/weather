@@ -1,6 +1,6 @@
 package com.expedia.weather.service;
 
-import com.expedia.rest.WeatherConditions;
+import com.expedia.weather.service.pojo.WeatherConditions;
 
 public interface WeatherService {
 

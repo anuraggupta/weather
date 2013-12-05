@@ -1,4 +1,4 @@
-package com.expedia.rest;
+package com.expedia.weather.service.pojo;
 
 public class WeatherImage {
 
